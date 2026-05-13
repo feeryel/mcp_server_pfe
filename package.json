@@ -1,0 +1,19 @@
+{
+  "name": "mcp-server-pfe",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "axios": "^1.15.0",
+    "n8n-nodes-mcp": "^0.1.37",
+    "zod": "^4.3.6"
+  }
+}
