@@ -846,11 +846,11 @@ This MCP server is part of the larger **Repair Management System** ecosystem.
 
 ### Frontend — Angular
 
-https://github.com/feeryel/repair-management-system
+https://github.com/feeryel/repair-management-system-front
 
 ### Backend — Node.js / Express
 
-https://github.com/feeryel/Backend_pfe
+https://github.com/feeryel/repair-management-system-backend
 
 ### MCP Server
 
