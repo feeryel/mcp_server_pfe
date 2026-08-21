@@ -8,15 +8,15 @@ The project enables a locally running Large Language Model (LLM) to interact wit
 
 ## 🧠 What is this project?
 
-The **MCP Server** acts as a bridge between a local AI model and the Repair Management System REST API.
+The **MCP Server** acts as a bridge between a local AI layer and the **Repair Management System REST API**.
 
 Instead of giving an AI model direct access to the database, the MCP server exposes a controlled set of **structured tools** representing the application's business operations.
 
-The AI can determine which tool is required based on the user's request and execute the corresponding operation through the MCP protocol.
+The AI can understand a user's request, determine which tool is required, and execute the corresponding operation through the MCP protocol.
 
 ### Architecture Overview
 
-```text
+~~~text
 ┌──────────────────────────────┐
 │       Local AI / LLM         │
 │                              │
@@ -47,13 +47,19 @@ The AI can determine which tool is required based on the user's request and exec
                │
                ▼
         MySQL / MariaDB
+~~~
 
-        🧠 Local AI with Ollama
+---
 
-The project uses Ollama to run the Large Language Model locally.
+## 🧠 Local AI with Ollama
 
-This architecture allows the AI layer to operate locally while communicating with the application through the MCP protocol.
+The project uses **Ollama** to run the Large Language Model locally.
 
+This allows the AI layer to operate locally while communicating with the application through the MCP protocol.
+
+### AI Workflow
+
+~~~text
 User Request
      │
      ▼
@@ -81,185 +87,218 @@ Ollama
      │
      ▼
 Natural Language Response
+~~~
 
 The LLM is responsible for understanding the user's request and determining which available MCP tool should be used.
 
 The MCP server is responsible for executing the requested operation through the existing backend API.
 
-✨ Key Features
-👥 Client Management
+---
+
+# ✨ Key Features
+
+## 👥 Client Management
 
 AI agents can interact with customer data through dedicated MCP tools.
 
-Available operations include:
+Available operations:
 
-List clients
-Create a client
-Retrieve a client by ID
-Update client information
-Delete a client
+- List clients
+- Create a client
+- Retrieve a client by ID
+- Update client information
+- Delete a client
 
 Example:
 
+~~~text
 "Show me all registered clients."
+~~~
 
 The local AI model can identify the appropriate MCP tool and request the corresponding operation.
 
-💻 Device Management
+---
+
+## 💻 Device Management
 
 The MCP server provides tools for managing customer devices.
 
 Available operations:
 
-List devices
-Create a device
-Retrieve a device
-Update device information
-Delete a device
+- List devices
+- Create a device
+- Retrieve a device
+- Update device information
+- Delete a device
 
 Device information can include:
 
-Brand
-Model
-Serial number
-Device type
-Associated customer
-🛠️ Repair Management
+- Brand
+- Model
+- Serial number
+- Device type
+- Associated customer
+
+---
+
+## 🛠️ Repair Management
 
 The AI layer can interact with repair records through MCP tools.
 
 Available operations:
 
-List repairs
-Create a repair
-Retrieve a repair
-Update a repair
-Delete a repair
+- List repairs
+- Create a repair
+- Retrieve a repair
+- Update a repair
+- Delete a repair
 
 Repair information can include:
 
-Repair description
-End date
-Labor time
-Repairability status
-Repair request
-Assigned technician
-📋 Repair Requests
+- Repair description
+- End date
+- Labor time
+- Repairability status
+- Repair request
+- Assigned technician
+
+---
+
+## 📋 Repair Requests
 
 The server exposes tools for managing repair requests.
 
 Available operations:
 
-List repair requests
-Create a repair request
-Retrieve a repair request
-Update a repair request
-Delete a repair request
+- List repair requests
+- Create a repair request
+- Retrieve a repair request
+- Update a repair request
+- Delete a repair request
 
 A repair request can contain information such as:
 
-Deposit date
-Expected repair date
-Failure symptoms
-Status
-Device
-Label identifier
-🧾 Invoice Management
+- Deposit date
+- Expected repair date
+- Failure symptoms
+- Status
+- Device
+- Label identifier
+
+---
+
+## 🧾 Invoice Management
 
 AI agents can interact with invoice data through MCP tools.
 
 Available operations:
 
-List invoices
-Create invoices
-Retrieve invoices
-Update invoices
-Delete invoices
+- List invoices
+- Create invoices
+- Retrieve invoices
+- Update invoices
+- Delete invoices
 
 Invoice information includes:
 
-Invoice number
-Date
-Amount excluding tax
-VAT
-Fiscal stamp
-Total amount
-Associated repair
-🔩 Spare Parts Management
+- Invoice number
+- Date
+- Amount excluding tax
+- VAT
+- Fiscal stamp
+- Total amount
+- Associated repair
+
+---
+
+## 🔩 Spare Parts Management
 
 The MCP server exposes tools for managing spare parts used in repairs.
 
 Available operations:
 
-List spare parts
-Create a spare part
-Retrieve a spare part
-Update a spare part
-Delete a spare part
+- List spare parts
+- Create a spare part
+- Retrieve a spare part
+- Update a spare part
+- Delete a spare part
 
 Supported information includes:
 
-Part code
-Name
-Price excluding tax
-Stock quantity
-📅 Planning Management
+- Part code
+- Name
+- Price excluding tax
+- Stock quantity
+
+---
+
+## 📅 Planning Management
 
 AI agents can interact with workshop planning.
 
 Available operations:
 
-List planning records
-Create planning records
-Retrieve planning records
-Update planning records
-Delete planning records
+- List planning records
+- Create planning records
+- Retrieve planning records
+- Update planning records
+- Delete planning records
 
 Planning information includes:
 
-Start date
-End date
-Repair request
-Responsible user
-👤 User Management
+- Start date
+- End date
+- Repair request
+- Responsible user
+
+---
+
+## 👤 User Management
 
 The MCP server provides user management tools including:
 
-List users
-Create users
-Retrieve users
-Update users
-Delete users
+- List users
+- Create users
+- Retrieve users
+- Update users
+- Delete users
 
 User information includes:
 
-Login
-Password
-Role
-🔧 Repair Line Management
+- Login
+- Password
+- Role
+
+---
+
+## 🔧 Repair Line Management
 
 Repair line items can also be managed through MCP.
 
 Operations include:
 
-List repair lines
-Create a repair line
-Retrieve a repair line
-Update a repair line
-Delete a repair line
+- List repair lines
+- Create a repair line
+- Retrieve a repair line
+- Update a repair line
+- Delete a repair line
 
 A repair line associates:
 
-A repair
-A spare part
-Quantity
-Unit price
-🔐 Authentication
+- A repair
+- A spare part
+- Quantity
+- Unit price
 
-The MCP server supports JWT authentication when communicating with the Repair Management backend.
+---
 
-A dedicated setToken tool allows the MCP server to store the JWT token used for authenticated API requests.
+# 🔐 Authentication
 
+The MCP server supports **JWT authentication** when communicating with the Repair Management backend.
+
+A dedicated `setToken` tool allows the MCP server to store the JWT token used for authenticated API requests.
+
+~~~text
 User
   │
   ▼
@@ -276,78 +315,119 @@ Authenticated REST API Request
   │
   ▼
 Repair Management Backend
+~~~
 
 This allows the MCP server to perform authenticated operations while respecting the security mechanisms already implemented by the backend.
 
-🧩 MCP Tools
+---
 
-The server exposes a collection of structured tools through the Model Context Protocol.
+# 🧩 MCP Tools
 
-Clients
+The server exposes a collection of structured tools through the **Model Context Protocol**.
+
+## Clients
+
+~~~text
 getClients
 createClient
 getClient
 updateClient
 deleteClient
-Devices
+~~~
+
+## Devices
+
+~~~text
 getAppareils
 createAppareil
 getAppareil
 updateAppareil
 deleteAppareil
-Repairs
+~~~
+
+## Repairs
+
+~~~text
 getReparations
 createReparation
 getReparation
 updateReparation
 deleteReparation
-Repair Requests
+~~~
+
+## Repair Requests
+
+~~~text
 getDemandes
 createDemande
 getDemande
 updateDemande
 deleteDemande
-Invoices
+~~~
+
+## Invoices
+
+~~~text
 getFactures
 createFacture
 getFacture
 updateFacture
 deleteFacture
-Spare Parts
+~~~
+
+## Spare Parts
+
+~~~text
 getPieces
 createPiece
 getPiece
 updatePiece
 deletePiece
-Planning
+~~~
+
+## Planning
+
+~~~text
 getPlannings
 createPlanning
 getPlanning
 updatePlanning
 deletePlanning
-Users
+~~~
+
+## Users
+
+~~~text
 getUsers
 createUser
 getUser
 updateUser
 deleteUser
-Repair Lines
+~~~
+
+## Repair Lines
+
+~~~text
 getLignes
 createLigne
 getLigne
 updateLigne
 deleteLigne
+~~~
 
 The tools use structured schemas to define their inputs and required parameters.
 
-🏗️ Complete Architecture
+---
+
+# 🏗️ Complete Architecture
 
 The project follows an:
 
-AI → MCP → REST API → Database
+**AI → MCP → REST API → Database**
 
 architecture.
 
+~~~text
                     ┌─────────────────────┐
                     │       User          │
                     └──────────┬──────────┘
@@ -382,7 +462,11 @@ architecture.
                     ┌─────────────────────┐
                     │   MySQL / MariaDB   │
                     └─────────────────────┘
-Data Flow
+~~~
+
+### Data Flow
+
+~~~text
 User Request
      ↓
 Ollama interprets the request
@@ -402,35 +486,57 @@ Result returned to MCP Server
 Ollama processes the result
      ↓
 Natural language response
-🛠️ Tech Stack
-AI & MCP
-Ollama
-Local Large Language Models (LLMs)
-Model Context Protocol (MCP)
-@modelcontextprotocol/sdk
-MCP Tools
-Structured tool schemas
-n8n-nodes-mcp
-Backend Communication
-Axios
-REST API
-HTTP / JSON
-JWT authentication
-Validation
-Zod
-Runtime
-Node.js
-JavaScript
-ES Modules
-📦 Main Dependencies
-Technology	Purpose
-Ollama	Local LLM execution
-MCP SDK	Model Context Protocol implementation
-Axios	REST API communication
-Zod	Input validation and schemas
-n8n-nodes-mcp	MCP / n8n integration
-Node.js	Runtime environment
-📂 Project Structure
+~~~
+
+---
+
+# 🛠️ Tech Stack
+
+## AI & MCP
+
+- **Ollama**
+- Local Large Language Models (LLMs)
+- **Model Context Protocol (MCP)**
+- `@modelcontextprotocol/sdk`
+- MCP Tools
+- Structured tool schemas
+- `n8n-nodes-mcp`
+
+## Backend Communication
+
+- **Axios**
+- REST API
+- HTTP / JSON
+- JWT authentication
+
+## Validation
+
+- **Zod**
+
+## Runtime
+
+- **Node.js**
+- **JavaScript**
+- **ES Modules**
+
+---
+
+# 📦 Main Dependencies
+
+| Technology | Purpose |
+|---|---|
+| Ollama | Local LLM execution |
+| MCP SDK | Model Context Protocol implementation |
+| Axios | REST API communication |
+| Zod | Input validation and schemas |
+| n8n-nodes-mcp | MCP / n8n integration |
+| Node.js | Runtime environment |
+
+---
+
+# 📂 Project Structure
+
+~~~text
 mcp_server_pfe/
 │
 ├── tools/
@@ -452,78 +558,110 @@ mcp_server_pfe/
 ├── package.json
 ├── package-lock.json
 └── README.md
+~~~
 
-The tools/ directory contains domain-specific MCP operations, while server.js registers and executes the available tools.
+The `tools/` directory contains domain-specific MCP operations, while `server.js` registers and executes the available tools.
 
-⚙️ Installation
-Prerequisites
+---
+
+# ⚙️ Installation
+
+## Prerequisites
 
 Make sure you have:
 
-Node.js
-npm
-Ollama
-A local LLM compatible with your Ollama setup
-A running Repair Management backend
-MySQL / MariaDB configured for the backend
-An MCP-compatible client
-1. Clone the repository
+- Node.js
+- npm
+- Ollama
+- A local LLM compatible with your Ollama setup
+- A running Repair Management backend
+- MySQL / MariaDB configured for the backend
+- An MCP-compatible client
+
+---
+
+## 1. Clone the Repository
+
+~~~bash
 git clone https://github.com/feeryel/mcp_server_pfe.git
-
-
 cd mcp_server_pfe
-2. Install dependencies
-npm install
-3. Install and Run Ollama
+~~~
 
-Install Ollama on your machine and download a compatible local model.
+---
+
+## 2. Install Dependencies
+
+~~~bash
+npm install
+~~~
+
+---
+
+## 3. Install and Run Ollama
+
+Install **Ollama** and download a compatible local model.
 
 Example:
 
+~~~bash
 ollama pull llama3
+~~~
 
 Start Ollama:
 
+~~~bash
 ollama serve
+~~~
 
 Check installed models:
 
+~~~bash
 ollama list
+~~~
 
 The exact model can be changed depending on your hardware and project requirements.
 
-4. Configure the Backend URL
+---
+
+## 4. Configure the Backend URL
 
 The MCP server communicates with the Repair Management REST API.
 
-Configure the backend URL in config.js.
+Configure the backend URL in `config.js`.
 
 Example:
 
+~~~javascript
 export const BASE_URL = "http://localhost:3000";
+~~~
 
 Update the URL if your backend runs on another host or port.
 
-▶️ Running the MCP Server
+---
+
+# ▶️ Running the MCP Server
 
 Start the MCP server with:
 
+~~~bash
 node server.js
+~~~
 
-The server uses STDIO transport, making it suitable for integration with MCP-compatible clients and AI development environments.
+The server uses **STDIO transport**, making it suitable for integration with MCP-compatible clients and AI development environments.
 
-🔌 MCP Integration
+---
+
+# 🔌 MCP Integration
 
 Once the MCP server is connected to an MCP-compatible AI client, the AI can discover the available tools and use them according to the user's request.
 
 Example:
 
+~~~text
 User:
 "Show me the clients currently registered in the repair workshop."
 
-
         ↓
-
 
 Ollama
         ↓
@@ -544,44 +682,82 @@ Client data
 Ollama
         ↓
 Natural language response
-💬 Example AI Interactions
-Retrieve Clients
+~~~
+
+---
+
+# 💬 Example AI Interactions
+
+## Retrieve Clients
+
+~~~text
 User:
 "Show me all registered clients."
+~~~
 
 Possible tool:
 
+~~~text
 getClients
-Retrieve Repairs
+~~~
+
+---
+
+## Retrieve Repairs
+
+~~~text
 User:
 "Show me the repairs currently in progress."
+~~~
 
 Possible tool:
 
+~~~text
 getReparations
-Create a Repair Request
+~~~
+
+---
+
+## Create a Repair Request
+
+~~~text
 User:
 "Create a repair request for device #42 with
 the symptom: broken screen."
+~~~
 
 Possible tool:
 
+~~~text
 createDemande
-Retrieve Invoices
+~~~
+
+---
+
+## Retrieve Invoices
+
+~~~text
 User:
 "Show me the invoices associated with the repair workshop."
+~~~
 
 Possible tool:
 
+~~~text
 getFactures
-🔒 Security Considerations
+~~~
+
+---
+
+# 🔒 Security Considerations
 
 The architecture intentionally avoids giving the AI direct access to the database.
 
+~~~text
 ❌ AI → Database
 
-
 ✅ AI → MCP Tool → REST API → Database
+~~~
 
 This provides a controlled layer between the AI model and the application's data.
 
@@ -589,33 +765,40 @@ The MCP server acts as a gateway for AI-driven operations while relying on the b
 
 JWT authentication is used when communicating with protected backend endpoints.
 
-🎯 Project Objectives
+---
+
+# 🎯 Project Objectives
 
 The main objectives of this project are to:
 
-Connect a local LLM to a real-world business application
-Use Ollama for local AI inference
-Implement the Model Context Protocol
-Expose backend capabilities as structured MCP tools
-Allow AI agents to interact with business data
-Avoid direct database access from AI agents
-Provide controlled access to business operations
-Integrate authentication into AI-driven workflows
-Explore AI agents in enterprise applications
-Build a reusable architecture for AI-assisted repair management
-💡 Technical Highlights
-🧠 Local AI
+- Connect a local LLM to a real-world business application
+- Use **Ollama** for local AI inference
+- Implement the **Model Context Protocol**
+- Expose backend capabilities as structured MCP tools
+- Allow AI agents to interact with business data
+- Avoid direct database access from AI agents
+- Provide controlled access to business operations
+- Integrate authentication into AI-driven workflows
+- Explore AI agents in enterprise applications
+- Build a reusable architecture for AI-assisted repair management
 
-The project uses Ollama to run an LLM locally rather than relying exclusively on a cloud-based model.
+---
 
-🔌 Model Context Protocol
+# 💡 Technical Highlights
+
+### 🧠 Local AI
+
+The project uses **Ollama** to run an LLM locally rather than relying exclusively on a cloud-based model.
+
+### 🔌 Model Context Protocol
 
 MCP provides a standardized interface between the AI layer and the application's tools.
 
-🛠️ Tool-Based Architecture
+### 🛠️ Tool-Based Architecture
 
 Business operations are exposed as structured tools such as:
 
+~~~text
 getClients
 createClient
 getReparations
@@ -623,64 +806,76 @@ createDemande
 getFactures
 getPieces
 getPlannings
-🔐 Controlled Access
+~~~
+
+### 🔐 Controlled Access
 
 The AI does not access the database directly.
 
 All operations go through the MCP server and the existing REST API.
 
-🌐 Existing Backend Integration
+### 🌐 Existing Backend Integration
 
-The MCP server integrates with the existing Node.js / Express Repair Management backend through Axios.
+The MCP server integrates with the existing **Node.js / Express Repair Management backend** through Axios.
 
-🚀 Future Improvements
+---
+
+# 🚀 Future Improvements
 
 Potential improvements include:
 
-Stronger input validation with Zod
-More granular authorization per MCP tool
-Tool-level permissions
-Improved error handling
-Logging and observability
-Dockerized MCP server
-Remote MCP transport
-Additional AI-specific tools
-More MCP-compatible client integrations
-Automated MCP tool testing
-Improved conversational memory
-More advanced AI workflows
-Better model selection for different tasks
-🔗 Related Projects
+- Stronger input validation with Zod
+- More granular authorization per MCP tool
+- Tool-level permissions
+- Improved error handling
+- Logging and observability
+- Dockerized MCP server
+- Remote MCP transport
+- Additional AI-specific tools
+- More MCP-compatible client integrations
+- Automated MCP tool testing
+- Improved conversational memory
+- More advanced AI workflows
+- Better model selection for different tasks
 
-This MCP server is part of the larger Repair Management System ecosystem.
+---
 
-Frontend — Angular
+# 🔗 Related Projects
+
+This MCP server is part of the larger **Repair Management System** ecosystem.
+
+### Frontend — Angular
 
 https://github.com/feeryel/repair-management-system
 
-Backend — Node.js / Express
+### Backend — Node.js / Express
 
 https://github.com/feeryel/Backend_pfe
 
-MCP Server
+### MCP Server
 
 https://github.com/feeryel/mcp_server_pfe
 
-👩‍💻 Author
-Feryel Dadi
+---
 
-Software Engineer — Software Engineering
-Master's Degree in Mobile Development Engineering
+# 👩‍💻 Author
 
-🌐 Portfolio:
+## Feryel Dadi
+
+**Software Engineer — Software Engineering**  
+**Master's Degree in Mobile Development Engineering**
+
+🌐 **Portfolio:**  
 https://portfolio-feryel.vercel.app
 
-💼 LinkedIn:
+💼 **LinkedIn:**  
 https://www.linkedin.com/in/feeryel-dadi
 
-🐙 GitHub:
+🐙 **GitHub:**  
 https://github.com/feeryel
 
-📄 License
+---
+
+# 📄 License
 
 This project was developed as part of an academic and professional software engineering project.
